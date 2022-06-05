@@ -3,38 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wwallas- <wwallas-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bankai <bankai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:08:06 by wwallas-          #+#    #+#             */
-/*   Updated: 2022/06/05 04:28:49 by wwallas-         ###   ########.fr       */
+/*   Updated: 2022/06/04 23:37:45 by bankai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-/* Chamadas repetidas (por exemplo, usando um loop) para sua função get_next_line() 
-devem permitir que você leia o arquivo de texto apontado pelo descritor de arquivo, 
-uma linha de cada vez. */
-
-/* Sua função deve retornar a linha que foi lida.
-Se não houver mais nada para ler ou se ocorrer um erro, deve retornar NULL.*/
-
-/* Certifique-se de que sua função funcione conforme o esperado ao ler um arquivo 
-e ao ler da entrada padrão. */
-
-/* Observe que a linha retornada deve incluir o caractere final \n,
-exceto se o final do arquivo for atingido e não terminar com um caractere \n */
-
-/* Add todas as funções auxiliares que você precisa no arquivo get_next_line_utils.c */
-
-/* Consideramos que get_next_line() tem um comportamento indefinido se o arquivo apontar para
-pelo descritor de arquivo alterado desde a última chamada, enquanto read() não atingiu o
-fim do arquivo. */
-
-/* Também consideramos que get_next_line() tem um comportamento indefinido ao ler
-um arquivo binário. No entanto, você pode implementar uma maneira lógica de lidar com esse comportamento se
-você quer. */
-
-#include "/home/coder/get/get_next_line.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
