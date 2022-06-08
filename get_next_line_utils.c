@@ -6,11 +6,21 @@
 /*   By: bankai <bankai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 03:33:23 by wwallas-          #+#    #+#             */
-/*   Updated: 2022/06/07 20:53:42 by bankai           ###   ########.fr       */
+/*   Updated: 2022/06/07 21:50:22 by bankai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	count;
+
+	count = 0;
+	while (s[count])
+		count++;
+	return (count);
+}
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
@@ -43,16 +53,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 		dst[count] = src[count];
 	dst[count] = '\0';
 	return (s_src);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	count;
-
-	count = 0;
-	while (s[count])
-		count++;
-	return (count);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
