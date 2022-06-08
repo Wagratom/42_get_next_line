@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wwallas- <wwallas-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bankai <bankai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 03:33:23 by wwallas-          #+#    #+#             */
-/*   Updated: 2022/06/05 03:48:18 by wwallas-         ###   ########.fr       */
+/*   Updated: 2022/06/07 20:53:42 by bankai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (s_src);
 }
 
-
 size_t	ft_strlen(const char *s)
 {
 	size_t	count;
@@ -74,4 +73,21 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	ft_strlcpy(sub_str, &s[start], len + 1);
 	return (sub_str);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*cpy;
+	char	*src;
+	size_t	i;
+
+	src = (char *)s;
+	cpy = (char *) malloc(ft_strlen(s) + 1);
+	if (cpy == NULL)
+		return (NULL);
+	i = -1;
+	while (src[++i])
+		cpy[i] = src[i];
+	cpy[i] = '\0';
+	return (cpy);
 }

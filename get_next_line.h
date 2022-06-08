@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wwallas- <wwallas-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bankai <bankai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 21:09:40 by wwallas-          #+#    #+#             */
-/*   Updated: 2022/06/05 04:25:24 by wwallas-         ###   ########.fr       */
+/*   Updated: 2022/06/07 20:59:02 by bankai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <stddef.h>
+
+
+char	*ft_strdup(const char *s);
+
+char	*get_next_line(int fd);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
@@ -24,7 +30,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
-size_t	ft_strlen(const char *s); 
+size_t	ft_strlen(const char *s);
 
 #endif
 
