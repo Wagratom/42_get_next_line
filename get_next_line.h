@@ -6,7 +6,7 @@
 /*   By: bankai <bankai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 21:09:40 by wwallas-          #+#    #+#             */
-/*   Updated: 2022/06/07 20:59:02 by bankai           ###   ########.fr       */
+/*   Updated: 2022/06/10 09:36:58 by bankai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,18 @@
 # include <stdlib.h>
 # include <stddef.h>
 
+size_t	ft_strlen(const char *s);
 
 char	*ft_strdup(const char *s);
 
-char	*get_next_line(int fd);
-
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
+char	*ft_strjoin(char const *s1, char const *s2);
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+char	*check_line_and_up(char *str, int *index, int flg);
 
-size_t	ft_strlen(const char *s);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
 #endif
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 10
-# endif
