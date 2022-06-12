@@ -1,3 +1,4 @@
+
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
@@ -54,6 +55,24 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
+char	*ft_strchr(const char *s, int c)
+{
+	char	*str;
+	char	ch;
+
+	str = (char *)s;
+	ch = (char)c;
+	while (*str)
+	{
+		if (*str == ch)
+			return (str);
+		str++;
+	}
+	if (*str == ch)
+		return (str);
+	return (NULL);
+}
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
@@ -75,25 +94,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		str[i + j] = s2[j];
 	str[i + j] = '\0';
 	return (str);
-}
-
-char	*check_line_and_up(char *str, int *index, int flg)
-{
-	char	*temp;
-
-	if (!flg)
-	{
-		temp = str;
-		str = ft_strdup(&str[*index + 1]);
-		free(temp);
-		return (str);
-	}
-	while (str[*index])
-	{
-		if (str[*index] == '\n')
-			return ("sucess");
-		*index += 1;
-	}
-	*index = 0;
-	return (NULL);
 }

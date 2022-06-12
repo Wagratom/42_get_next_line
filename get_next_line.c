@@ -1,136 +1,159 @@
 #include "get_next_line.h"
 
-char	*read_file(int fd, char**buffer, int *index);
-char	*filter_line(int fd, char **buffer, int *index);
-char	*return_line(int fd, char **buffer, int *index);
+#include <fcntl.h>
+#include <stdio.h>
 
-char	*free_(char	**buffer, char **buffer2)
+char	*read_file(int fd, char **backup);
+
+int	check_line(char **str)
 {
-	if (buffer != NULL)
+	int	i;
+
+	i = -1;
+	while ((*str)[++i])
+	{
+		if ((*str)[i] == '\n')
+			return (1);
+	}
+	return (0);
+}
+
+char	*find_line(char	**str)
+{
+	char	*temp;
+	char	*line;
+	int		i;
+
+	i = 0;
+	while ((*str)[i] != '\n' && (*str)[i])
+		i++;
+	temp = (*str);
+	line = ft_substr(temp, 0, (i + 1));
+	if (!temp[i + 1])
+	{
+		free(*str);
+		(*str) = NULL;
+	}
+	else
+	{
+		(*str) = ft_strdup(&temp[i + 1]);
+		free(temp);
+	}
+	return (line);
+}
+
+char	*check_backup(char **backup, char **buffer)
+{
+	char	*line;
+
+	if (!(*backup)[0])
+	{
+		free(*backup);
 		free(*buffer);
-	if (buffer2 != NULL)
-		free(*buffer2);
-	return (NULL);
+		return (NULL);
+	}
+	line = ft_strdup(*backup);
+	free(*backup);
+	(*backup) = NULL;
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
-	int			index;
+	static char	*backup;
+	int			i;
 
-	index = 0;
+	i = -1;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!buffer)
+	if (!backup)
 	{
-		buffer = (char *)malloc(sizeof(char) *(BUFFER_SIZE + 1));
-		if (!buffer)
+		backup = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (!backup)
 			return (NULL);
-		buffer[0] = '\0';
+		while (i++ < BUFFER_SIZE)
+			backup[i] = 0;
 	}
-	return (read_file(fd, &buffer, &index));
+	return (read_file(fd, &backup));
 }
 
-char	*read_file(int fd, char**buffer, int *index)
+char	*read_file(int fd, char **backup)
 {
-	char	*buffer2;
-	char	*temp;
-	int		n_let;
-
-	if (**buffer == 0)
-	{
-		buffer2 = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		if (!buffer2)
-			return (NULL);
-		n_let = read(fd, buffer2, BUFFER_SIZE);
-		if (n_let <= 0)
-			return (free_(buffer, &buffer2));
-		buffer2[n_let] = '\0';
-		temp = *buffer;
-		*buffer = ft_strjoin(*buffer, buffer2);
-		free_(&temp, &buffer2);
-	}
-	return (filter_line(fd, buffer, index));
-}
-
-char	*filter_line(int fd, char **buffer, int *index)
-{
-	char	*temp;
-
-	if (return_line(fd, buffer, index))
-	{
-		temp = ft_substr(*buffer, 0, (*index + 1));
-		*buffer = check_line_and_up(*buffer, index, 0);
-	}
-	else
-	{
-		temp = ft_strdup(*buffer);
-		free(*buffer);
-	}
-	return (temp);
-}
-
-char	*return_line(int fd, char **buffer, int *index)
-{
-	char	*buffer2;
+	char	*buffer;
 	char	*temp;
 	int		n_let;
 
 	while (1)
 	{
-		if (check_line_and_up(*buffer, index, 1))
-			return ("sucess");
-		buffer2 = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		if (!buffer2)
+		if (check_line(backup))
+			return (find_line(backup));
+		buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (!buffer)
 			return (NULL);
-		n_let = read(fd, buffer2, BUFFER_SIZE);
-		if (n_let <= 0)
-			return (free_(&buffer2, NULL));
-		buffer2[n_let] = '\0';
-		temp = *buffer;
-		*buffer = ft_strjoin(*buffer, buffer2);
-		free_(&temp, &buffer2);
+		n_let = read(fd, buffer, BUFFER_SIZE);
+		if (n_let == -1)
+			return (NULL);
+		if (n_let == 0)
+			return (check_backup(backup, &buffer));
+		buffer[n_let] = '\0';
+		temp = (*backup);
+		*backup = ft_strjoin(*backup, buffer);
+		free(temp);
+		free(buffer);
 	}
+	return (NULL);
 }
+
 /*
 int	main(void)
 {
-	char	*s;
 	int		fd;
+	char	*s;
 
 	fd = open("texto", O_RDONLY);
-	s = get_next_line (fd);
+	s = get_next_line(fd);
 	printf("s = %s\n", s);
 	free(s);
 
-	s = get_next_line (fd);
+	s = get_next_line(fd);
 	printf("s = %s\n", s);
 	free(s);
 
-	s = get_next_line (fd);
+	s = get_next_line(fd);
 	printf("s = %s\n", s);
 	free(s);
 
-	s = get_next_line (fd);
+	s = get_next_line(fd);
 	printf("s = %s\n", s);
 	free(s);
 
-	s = get_next_line (fd);
+	s = get_next_line(fd);
 	printf("s = %s\n", s);
 	free(s);
 
-	s = get_next_line (fd);
+	s = get_next_line(fd);
 	printf("s = %s\n", s);
 	free(s);
 
-	s = get_next_line (fd);
+	s = get_next_line(fd);
 	printf("s = %s\n", s);
 	free(s);
 
-	s = get_next_line (fd);
+	s = get_next_line(fd);
 	printf("s = %s\n", s);
 	free(s);
 
+	s = get_next_line(fd);
+	printf("s = %s\n", s);
+	free(s);
+
+	s = get_next_line(fd);
+	printf("s = %s\n", s);
+	free(s);
+
+	s = get_next_line(fd);
+	printf("s = %s\n", s);
+	free(s);
 	close(fd);
-	return (0);
-} */
+}
+ */
