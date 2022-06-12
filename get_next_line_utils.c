@@ -95,3 +95,18 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str[i + j] = '\0';
 	return (str);
 }
+
+char	*free_ptr(char **bloco1, char **bloco2)
+{
+	if (bloco1)
+	{
+		free((*bloco1));
+		*bloco1 = NULL;
+	}
+	if (bloco2)
+	{
+		free((*bloco2));
+		*bloco2 = NULL;
+	}
+	return (NULL);
+}

@@ -47,14 +47,9 @@ char	*check_backup(char **backup, char **buffer)
 	char	*line;
 
 	if (!(*backup)[0])
-	{
-		free(*backup);
-		free(*buffer);
-		return (NULL);
-	}
+		return (free_ptr(backup, buffer));
 	line = ft_strdup(*backup);
-	free(*backup);
-	(*backup) = NULL;
+	free_ptr(backup, buffer);
 	return (line);
 }
 
@@ -92,7 +87,7 @@ char	*read_file(int fd, char **backup)
 			return (NULL);
 		n_let = read(fd, buffer, BUFFER_SIZE);
 		if (n_let == -1)
-			return (NULL);
+			return (free_ptr(backup, &buffer));
 		if (n_let == 0)
 			return (check_backup(backup, &buffer));
 		buffer[n_let] = '\0';
@@ -104,13 +99,13 @@ char	*read_file(int fd, char **backup)
 	return (NULL);
 }
 
-/*
+/* 
 int	main(void)
 {
 	int		fd;
 	char	*s;
 
-	fd = open("texto", O_RDONLY);
+	fd = open("41_no_nl", O_RDONLY);
 	s = get_next_line(fd);
 	printf("s = %s\n", s);
 	free(s);
@@ -118,42 +113,4 @@ int	main(void)
 	s = get_next_line(fd);
 	printf("s = %s\n", s);
 	free(s);
-
-	s = get_next_line(fd);
-	printf("s = %s\n", s);
-	free(s);
-
-	s = get_next_line(fd);
-	printf("s = %s\n", s);
-	free(s);
-
-	s = get_next_line(fd);
-	printf("s = %s\n", s);
-	free(s);
-
-	s = get_next_line(fd);
-	printf("s = %s\n", s);
-	free(s);
-
-	s = get_next_line(fd);
-	printf("s = %s\n", s);
-	free(s);
-
-	s = get_next_line(fd);
-	printf("s = %s\n", s);
-	free(s);
-
-	s = get_next_line(fd);
-	printf("s = %s\n", s);
-	free(s);
-
-	s = get_next_line(fd);
-	printf("s = %s\n", s);
-	free(s);
-
-	s = get_next_line(fd);
-	printf("s = %s\n", s);
-	free(s);
-	close(fd);
-}
- */
+} */
