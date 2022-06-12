@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wwallas- <wwallas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/12 23:45:40 by wwallas-          #+#    #+#             */
-/*   Updated: 2022/06/12 23:48:33 by wwallas-         ###   ########.fr       */
+/*   Created: 2022/06/12 23:44:05 by wwallas-          #+#    #+#             */
+/*   Updated: 2022/06/12 23:44:09 by wwallas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*read_file(int fd, char **backup);
 
@@ -61,17 +61,17 @@ char	*check_backup(char **backup, char **buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*backup;
+	static char	*backup[FD_MAX];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FD_MAX)
 		return (NULL);
-	if (!backup)
+	if (!backup[fd])
 	{
-		backup = ft_strdup("");
-		if (!backup)
+		backup[fd] = ft_strdup("");
+		if (!backup[fd])
 			return (NULL);
 	}
-	return (read_file(fd, &backup));
+	return (read_file(fd, &backup[fd]));
 }
 
 char	*read_file(int fd, char **backup)

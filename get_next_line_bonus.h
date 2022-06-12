@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wwallas- <wwallas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/12 23:45:50 by wwallas-          #+#    #+#             */
-/*   Updated: 2022/06/12 23:45:52 by wwallas-         ###   ########.fr       */
+/*   Created: 2022/06/12 23:44:21 by wwallas-          #+#    #+#             */
+/*   Updated: 2022/06/12 23:44:24 by wwallas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -31,6 +31,10 @@ char	*free_ptr(char **bloco1, char **bloco2);
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
+# endif
+
+# ifndef FD_MAX
+#  define FD_MAX 1024
 # endif
 
 #endif
